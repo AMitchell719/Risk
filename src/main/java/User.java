@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @version 0.5
  */
 
-public class User{
+public class User implements Observer{
 	private String username;
 	private int turnPosition;
 	private int score;
@@ -18,6 +18,7 @@ public class User{
 	private int twitterCount;
 	private int credits;
 	private boolean hasCredits;
+	private ArrayList<Observer> battleObservers = new ArrayList<Observer>();
 	private HashMap<String,Territory> territoriesHeld;
 	private HashMap<String,Continent> continentsHeld;
 	private Hand playingHand;
@@ -267,7 +268,6 @@ public class User{
 	 */
 	public void addTerritory(Territory territory) {
 
-		System.out.println(username + " now occupies " + territory.getName() + "!");
 		territoriesHeld.put(territory.getName(), territory);
 	}
 
@@ -280,7 +280,6 @@ public class User{
 	 */
 	public void deleteTerritory(String territoryName)
 	{
-		System.out.println(username + " has lost control of " + territoryName);
 		territoriesHeld.remove(territoryName);
 	}
 
@@ -398,7 +397,7 @@ public class User{
 	 * @see User
 	 * @see Continent
 	 */
-	public void addContinent(Continent continent){
+	public void addContinent(Continent continent) {
 		continentsHeld.put(continent.getName(), continent);
 	}
 
@@ -409,7 +408,7 @@ public class User{
 	 * @see User
 	 * @see Territory
 	 */
-	public void deleteContinent(String continentName){
+	public void deleteContinent(String continentName) {
 		continentsHeld.remove(continentName);
 	}
 
@@ -421,5 +420,18 @@ public class User{
 	 */
 	public void alertUser(User user){
 		System.out.println(user.getUsername() + ", your territory is under attack");
+	}
+
+	/**
+	 * Alerts Users to the fact that their territory is under attack using the Observer pattern. We must
+	 * override the update() function
+	 * @see User
+	 * @see BattleObservers
+	 * @see Observer
+	 * @see Observable
+	 */
+	@Override
+	public void update() {
+		System.out.println(this.username + ", your territory is being attacked!");
 	}
 }
