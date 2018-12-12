@@ -8,6 +8,7 @@ public interface Observable {
 
     /**
      * Adds a User to the Observer list
+     * @param o The Observer to add
      * @see BattleObservers
      * @see Observer
      */
@@ -15,6 +16,7 @@ public interface Observable {
 
     /**
      * Removes a User from the Observer list
+     * @param o The observer to remove
      * @see BattleObservers
      * @see Observer
      */
