@@ -10,17 +10,28 @@ public class UserTest {
     User user2;
     Territory Alaska;
     Territory Quebec;
+    Territory territory;
     Continent NorthAmerica;
     HashMap<String,Territory> territoriesHeld;
     HashMap<String,Continent> continentsHeld;
     ArrayList<Territory> territories = new ArrayList<Territory>();
+    Card card;
+    Deck deck;
+    Board board;
+    Hand hand;
 
     @Before
     public void setup() throws Exception {
+        board = new Board();
+        board.setupBoard();
         user1 = new User("Aaron", 25);
         user2 = new User("Chad", 20);
         Alaska = new Territory("Alaska");
         Quebec = new Territory("Quebec");
+        territory = new Territory("Brazil");
+        card = new Card("Infantry", territory);
+        deck = new Deck(board.getBoardTerritories());
+        hand = new Hand();
         NorthAmerica = new Continent("NorthAmerica", 5, territories);
         user1.addTerritory(Alaska);
         user2.addTerritory(Quebec);
@@ -149,6 +160,17 @@ public class UserTest {
     public void testDeleteContinent(){
         user1.addContinent(NorthAmerica);
         user1.deleteContinent("NorthAmerica");
+    }
+
+    @Test
+    public void testAddCard(){
+        user1.addCard(card);
+        Assert.assertTrue(user1.getHand().size() == 1); // Is user's hand updating?
+    }
+
+    @Test
+    public void testGetHand(){
+        Assert.assertTrue(user1.getHand().size() == 0); // Is user's hand returning cards?
     }
 
     @Test
