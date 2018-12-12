@@ -5,5 +5,10 @@
  * @version 0.5
  */
 public interface Observer {
+
+    /**
+     * This method must be overridden in the respective class implementing the Observer pattern
+     * @see User
+     */
     public void update();
 }
