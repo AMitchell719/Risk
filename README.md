@@ -2,8 +2,9 @@
 The board game of Risk, coded in Java
 
 # To-Do
-Refactor a few classes to read information from text file<br/><br/>
+Refactor a few classes to read information from text file<br/>
 
+# Information
 Some of the goals of this project included working with a team, communication to ensure sprint deadlines were met, learning project management with Maven, test coverage with JUnit and Travis CI integration and getting more hands on experience with software design patterns. We chose to communicate through Trello and Slack, while also meeting up once a week in person after class to ensure our project stayed on track. Some of the features we were required to add in 2 week sprint periods include:
 
 1. Twitter API functionality<br/>
