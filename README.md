@@ -14,7 +14,7 @@ Some of the goals of this project included working with a team, communication to
 4. Implement an Observer pattern to notify Users of a Territory being attacked<br/>
 5. An undo system using a data structure (we chose to implement a HashMap)<br/>
 6. Use UMLGraph with Maven Site to produce UML graphs of our classes<br/>
-7. Add a credit system for Users to purchase Undo actions, Risk cards, or transfer credits to another User<br/>
+7. Add a Proxy patter so Users can purchase Undo actions, Risk cards, or transfer credits to another User<br/>
 8. Functional Telegram Chatbot that Users could login and play the game with<br/>
 9. Extensive documentation with Javadoc<br/><br/>
 
