@@ -52,18 +52,6 @@ public class User implements Observer{
 		playingHand = new Hand();
 	}
 
-    /**
-     * Overrides the run functionality so we can implement User's into threads. We will call each user
-     * in the main loop and store them in a thread. If they have not completed their turn in 30 seconds
-     * they will be moved to the blocked state. This will allow the next player in the while loop to have
-     * their turn, and they will be placed in a thread as well
-     */
-    /*
-	public void run(){
-
-    }
-    */
-
 	/**
 	 * Adds the card drawn from the deck to the User's playing hand
 	 * @param drawnCard The card that was drawn from the deck
