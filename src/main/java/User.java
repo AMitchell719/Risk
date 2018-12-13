@@ -10,26 +10,27 @@ import java.util.ArrayList;
  * @version 0.5
  */
 
-public class User implements Observer{
+public class User implements Observer, Purchase{
 	private String username;
 	private int turnPosition;
 	private int score;
 	private int armyPower;
 	private int twitterCount;
 	private int credits;
+	private Purchase bank;
 	private boolean hasCredits;
 	private ArrayList<Observer> battleObservers = new ArrayList<Observer>();
 	private HashMap<String,Territory> territoriesHeld;
 	private HashMap<String,Continent> continentsHeld;
 	private Hand playingHand;
-	private boolean creditFlag;
+	private boolean creditsFlag;
 
 	/**
 	 * Spawns a user with the chosen name and army power (which is based off the total number
 	 * of players playing the game). The User will also have a count for the amount of territories
 	 * that they conquered over the course of the game which will be posted on Twitter (the variable
 	 * being twitterCount. The credits variable keeps track of the User's score (how many games they
-	 * have won), and each User will gain 1 credit every turn. Each User will have a HashMap of the
+	 * have won), and each User will gain 1 credits every turn. Each User will have a HashMap of the
 	 * territories they control, and the continents they control as well and each User will have their
 	 * own hand, which holds the Risk cards drawn each turn
 	 * @param name The name the User selects at the beginning of the game
@@ -50,6 +51,10 @@ public class User implements Observer{
 		territoriesHeld = new HashMap<String,Territory>();
 		continentsHeld = new HashMap<String,Continent>();
 		playingHand = new Hand();
+	}
+
+	public User(int credits) {
+		this.credits = credits;
 	}
 
 	/**
@@ -78,32 +83,19 @@ public class User implements Observer{
 	}
 
 	/**
-	 * Returns the actual Hand object in memory to reference or
-	 * call further functions on
-	 * @see User
-	 * @see Deck
-	 * @see Card
-	 * @see Hand
-	 */
-	public Hand getHandClass() {
-
-		return playingHand;
-	}
-
-	/**
 	 * Checks if the User is allowed to purchase an undo function
 	 * @return Returns True or False depending on whether User has enough credits
 	 * @see User
 	 */
 	public boolean checkPurchaseUndo(){
 		if(credits >= 5){
-			creditFlag = true;
+			creditsFlag = true;
 		}
 		else{
-			creditFlag = false;
+			creditsFlag = false;
 			System.out.println("You do not have enough credits to purchase an undo");
 		}
-		return creditFlag;
+		return creditsFlag;
 	}
 
 	/**
@@ -116,13 +108,13 @@ public class User implements Observer{
 	 */
 	public boolean checkPurchaseCard(){
 		if(credits >= 3){
-			creditFlag = true;
+			creditsFlag = true;
 		}
 		else{
-			creditFlag = false;
+			creditsFlag = false;
 			System.out.println("You do not have enough credits to purchase a card");
 		}
-		return creditFlag;
+		return creditsFlag;
 	}
 
 	/**
@@ -132,13 +124,13 @@ public class User implements Observer{
 	 */
 	public boolean checkPurchaseTransfer(){
 		if(credits >= 10){
-			creditFlag = true;
+			creditsFlag = true;
 		}
 		else{
-			creditFlag = false;
+			creditsFlag = false;
 			System.out.println("You do not have enough credits to transfer to another player");
 		}
-		return creditFlag;
+		return creditsFlag;
 	}
 
 	/**
@@ -237,7 +229,6 @@ public class User implements Observer{
 		return score;
 	}
 
-
 	/**
 	 * Grabs User's username they chose at the beginning of the game
 	 * @return User's name
@@ -266,13 +257,12 @@ public class User implements Observer{
 	 * @see User
 	 * @see Territory
 	 */
-	public void deleteTerritory(String territoryName)
-	{
+	public void deleteTerritory(String territoryName) {
 		territoriesHeld.remove(territoryName);
 	}
 
 	/**
-	 * Increments User's current amount of credits. Each User will gain 1 credit per turn.
+	 * Increments User's current amount of credits. Each User will gain 1 credits per turn.
 	 * Credit can be used to buy cards, purchase an undo feature, buy armies or transfer
 	 * their credits to another player
 	 * @return User's credits
@@ -300,20 +290,20 @@ public class User implements Observer{
 	}
 
 	/**
-	 * Decrements User's current amount of credits. Each User will gain 1 credit per turn.
+	 * Decrements User's current amount of credits. Each User will gain 1 credits per turn.
 	 * Credit can be used to buy cards, purchase an undo feature, buy armies or transfer
 	 * their credits to another player
-	 * @param creditAmount The amount of credit to remove from User's credits
+	 * @param creditsAmount The amount of credits to remove from User's credits
 	 * @return User's credits
 	 * @see User
 	 */
-	public int removeCredit(int creditAmount){
-		if((credits - creditAmount) < 0)
+	public int removeCredit(int creditsAmount){
+		if((credits - creditsAmount) < 0)
 		{
 			credits = 0;
 		}
 		else {
-			credits = credits - creditAmount;
+			credits = credits - creditsAmount;
 		}
 		return credits;
 	}
@@ -350,7 +340,7 @@ public class User implements Observer{
 
 	/**
 	 * Returns the User's number of credits
-	 * @return User's credit amount
+	 * @return User's credits amount
 	 * @see User
 	 */
 	public int getCredits(){
@@ -363,8 +353,7 @@ public class User implements Observer{
 	 * @see User
 	 * @see Territory
 	 */
-	public ArrayList<Territory> getUserTerritories()
-	{
+	public ArrayList<Territory> getUserTerritories() {
 		return new ArrayList<Territory>(territoriesHeld.values());
 	}
 
@@ -401,6 +390,17 @@ public class User implements Observer{
 	}
 
 	/**
+	 * Users's bank will be deducted credits. We can either have a bank that holds the credits, User's can
+	 * have a credit variable, or we can do a combination of both
+	 * @see Purchase
+	 * @see Proxy
+	 */
+	public int deductCardBank(){
+		bank.purchaseCard();
+		return credits;
+	}
+
+	/**
 	 * Alerts Users to the fact that their territory is under attack using the Observer pattern. We must
 	 * override the update() function
 	 * @see User
@@ -411,5 +411,49 @@ public class User implements Observer{
 	@Override
 	public void update() {
 		System.out.println(this.username + ", your territory is being attacked!");
+	}
+
+	/**
+	 * Allows Users to purchase an undo action through a proxy interface
+	 * @return Returns the amount of credits deducted
+	 * @see Purchase
+	 * @see Proxy
+	 */
+	@Override
+	public int purchaseUndo(){
+		return credits -= 5;
+	}
+
+	/**
+	 * Allows Users to purchase another Risk card through a proxy interface
+	 * @return Returns the amount of credits deducted
+	 * @see Purchase
+	 * @see Proxy
+	 */
+	@Override
+	public int purchaseCard(){
+		return credits -= 3;
+	}
+
+	/**
+	 * Allows Users to transfer their credits to another player through a proxy interface
+	 * @return Returns the amount of credits deducted
+	 * @see Purchase
+	 * @see Proxy
+	 */
+	@Override
+	public int transferCredit(){
+		return credits;
+	}
+
+	/**
+	 * Returns the current amount of credits the User has. Goes through a proxy interface
+	 * @return Returns the amount of credits deducted
+	 * @see Purchase
+	 * @see Proxy
+	 */
+	@Override
+	public int getCredit(){
+		return credits;
 	}
 }
