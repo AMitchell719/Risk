@@ -169,7 +169,7 @@ public class DadBot extends TelegramLongPollingBot{
      */
     @Override
     public String getBotUsername() {
-        return "Bot Name Here";
+        return "name";
     }
 
     /**
@@ -180,7 +180,7 @@ public class DadBot extends TelegramLongPollingBot{
      */
     @Override
     public String getBotToken() {
-        return "Secret Key Here";
+        return "token";
     }
 
     /**
