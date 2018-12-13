@@ -104,9 +104,10 @@ public class DadBot extends TelegramLongPollingBot{
 
             // Attack the specified territory
             else if(message_text.equals("/attack@TeamHALBot")){
-                SendMessage attack = new SendMessage().setChatId(chat_id).setText("Player 2, NorthWest Territory has lost 5 armies!");
-                board.getTerritoryName("Alaska").decrementArmies(1);
-
+                
+                SendMessage attack = new SendMessage().setChatId(chat_id).setText("Attacking your territory of choice");
+                board.getTerritoryName(container.get(1)).decrementArmies(1);
+                
                 try {
                     execute(attack); // Sending our message object to user
                 } catch (TelegramApiException e) {
@@ -120,10 +121,9 @@ public class DadBot extends TelegramLongPollingBot{
             else if(message_text.equals("/fortify@TeamHALBot")){
 
                 SendMessage message = new SendMessage().setChatId(chat_id).setText("Player 1, fortifying your territory! You've" +
-                        " gained 4 new armies!");
-
-                board.getTerritoryName("Alaska").setArmyPower(24);
-                board.getTerritoryName("Alaska").getUser().addArmyPower(4);
+                        " gained 1 new army!");
+                board.getTerritoryName(container.get(1)).incrementArmies(1);
+                
                 try {
                     execute(message); // Sending our message object to user
                 } catch (TelegramApiException e) {
