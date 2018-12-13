@@ -1,6 +1,5 @@
-# Risk [![Build Status](https://travis-ci.com/AMitchell719/Risk.svg?branch=master)](https://travis-ci.com/AMitchell719/Risk)
+# Risk [![Build Status](https://travis-ci.com/AMitchell719/Risk.svg?branch=master)](https://travis-ci.com/AMitchell719/Risk)[![codecov](https://codecov.io/gh/AMitchell719/Risk/branch/master/graph/badge.svg)](https://codecov.io/gh/AMitchell719/Risk)
 
-[![codecov](https://codecov.io/gh/AMitchell719/Risk/branch/master/graph/badge.svg)](https://codecov.io/gh/AMitchell719/Risk)
 The board game of Risk, coded in Java
 
 # To-Do
