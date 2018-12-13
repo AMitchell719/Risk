@@ -178,7 +178,7 @@ public class User implements Observer, Purchase{
 	    twitterCount = twitterCount + increase;
 
 	    return twitterCount;
-    }
+    	}
 
 
 	/**
