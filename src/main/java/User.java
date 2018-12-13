@@ -413,16 +413,6 @@ public class User implements Observer{
 	}
 
 	/**
-	 * Alerts a User to the fact that their territory is under attack
-	 * @param user The User that needs to be alerted to their territory being attacked
-	 * @see User
-	 * @see Territory
-	 */
-	public void alertUser(User user){
-		System.out.println(user.getUsername() + ", your territory is under attack");
-	}
-
-	/**
 	 * Alerts Users to the fact that their territory is under attack using the Observer pattern. We must
 	 * override the update() function
 	 * @see User
