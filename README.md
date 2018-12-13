@@ -9,7 +9,7 @@ Refactor a few classes to read information from text file<br/>
 Some of the goals of this project included working with a team, communication to ensure sprint deadlines were met, learning project management with Maven, test coverage with JUnit and Travis CI integration and getting more hands on experience with software design patterns. We chose to communicate through Trello and Slack, while also meeting up once a week in person after class to ensure our project stayed on track. Some of the features we were required to add in 2 week sprint periods include:
 
 1. Twitter API functionality<br/>
-2. JUnit test cases for 50% of our code<br/>
+2. JUnit test cases and code coverage for at least 80% of our code
 3. Travis CI integration<br/>
 4. Implement an Observer pattern to notify Users of a Territory being attacked<br/>
 5. An undo system using a data structure (we chose to implement a HashMap)<br/>
